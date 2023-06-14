@@ -1,7 +1,7 @@
 {
   "name": "apirest",
   "version": "1.0.0",
-  "description": "ApiRest desenvolvida com Node , Express e Sequelize",
+  "description": "CRUD desenvolvida com Node , Express e Sequelize",
   "main": "index.js",
   "type": "module",
   "scripts": {

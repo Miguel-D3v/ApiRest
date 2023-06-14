@@ -1,32 +1,58 @@
+import movieModel from "../models/modelMovie.js";
 
- class movieServices{
-     constructor(Movies){
-       this.movie = Movies;
-  }
 
-  async getAll(){
+  async function findAll(req,res){
      try{
-       return await this.movie.findAll();
+       const result = await movieModel.findAll();
+       res.json(result)
    }catch(err){
     throw new Error(err)
+     console.log(err)
    }
   }
 
-  async addMovie(nome,ano,diretor,genero,sinopse){
-     try{
-        await this.movie.create({
-           nome : nome,
-           ano : ano,
-           diretor : diretor,
-           genero : genero,
-           sinopse : sinopse,
-        })
-      return ({ message:" Sucess "})
-     }catch(err){
-     throw new Error(err)
+ async function addMovie(req,res){
+   try{
+      await  movieModel.create({
+    nome: req.body.nome,
+    ano: req.body.ano,
+    diretor: req.body.diretor,
+    genero: req.body.genero,
+    sinopse: req.body.sinopse,
+  })
+   res.json({ message: "Success" })
+  }catch(error){
+    throw new Error(error)
+    res.json(error.message)
+   }
+}
+
+   async function  updateMovie(req,res){
+      try{
+      await movieModel.update(
+    {
+      nome: req.body.nome,
+      ano: req.body.ano,
+      diretor: req.body.diretor,
+      genero: req.body.genero,
+      sinopse: req.body.sinopse,
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    }
+  );
+       res.json({ message: "Success" })
+        }catch(err){
+      throw new Error(err)
+      res.json(error.message)
      }
-  }
+
+
 }
 
 
-export default movieServices;
+
+export default { findAll , addMovie , updateMovie  }
+
