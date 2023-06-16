@@ -9,6 +9,7 @@ import movieServices from "../services/service.js";
   route.get("/movies",movieServices.findAll)
   route.post("/addmovies",movieServices.addMovie)
   route.put("/update/:id",movieServices.updateMovie)
+  route.delete("/delete/:id",movieServices.deleteMovie)
 
 export default route;
 

@@ -48,11 +48,23 @@ import movieModel from "../models/modelMovie.js";
       throw new Error(err)
       res.json(error.message)
      }
+   }
+
+    async function deleteMovie(req,res){
+       try{
+         await movieModel.destroy({
+            where:{ id: req.params.id, },
+         })
+        res.json({ message:"Successfully deleted "  })
+       }catch(err){
+       throw new Error(err)
+       res.json(err.message)
+       }
+  }
 
 
-}
 
 
+export default { findAll , addMovie , updateMovie , deleteMovie }
 
-export default { findAll , addMovie , updateMovie  }
 
